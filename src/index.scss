@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import '@styles/variables';
+@import './styles/variables';
 
 :root {
   font-family: $font-family;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: $dark-grey;
   background-color: $color-background;
@@ -14,11 +13,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
 
 svg {
-  fill: #FFFFFF;
+  fill: #ffffff;
+}
+
+ul {
+  list-style: none;
 }
