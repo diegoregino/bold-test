@@ -2,19 +2,20 @@
 
 .dialog {
   background-color: rgba($dark-grey, 0.6);
+  border: none;
   height: 100%;
   position: absolute;
   top: 0;
   width: 100%;
-
+  
   &--content {
     background-color: $white;
     border-radius: $spacing-md 0 0 $spacing-md;
     height: 100%;
-    width: 40%;
     padding: $spacing-lg;
     position: inherit;
     right: 0;
+    width: 40%;
   }
 
   &--close {

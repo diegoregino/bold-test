@@ -5,11 +5,21 @@ import clsx from 'clsx';
 type FilterOptions = {
   selected?: boolean;
   label: string;
+  onClick: () => void;
 };
 
-const FilterOption: React.FC<FilterOptions> = ({ selected, label }) => {
+const FilterOption: React.FC<FilterOptions> = ({
+  selected,
+  label,
+  onClick,
+}) => {
   return (
-    <div className={clsx({ selected: selected }, 'option-box')}>{label}</div>
+    <div
+      onClick={onClick}
+      className={clsx({ selected: selected }, 'option-box')}
+    >
+      {label}
+    </div>
   );
 };
 

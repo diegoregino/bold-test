@@ -1,9 +1,16 @@
 import styles from './SalesList.module.scss';
-import Amex from '../../assets/visa-logo.png';
 import Icon from '../Icon/Icon';
 import clsx from 'clsx';
+import { TransactionsType } from '../../types/transactions';
+import React from 'react';
+import { currencyFormat } from '../../lib/utils';
+import PaymentMethodLogo from '../PaymentMethodLogo/PaymentMethodLogo';
 
-const SalesList = () => {
+type SalesListProps = {
+  data: TransactionsType[] | undefined;
+};
+
+const SalesList: React.FC<SalesListProps> = ({ data }) => {
   return (
     <div className={clsx(styles.saleslist)}>
       <div className={clsx('background-gradient', styles['saleslist--title'])}>
@@ -23,62 +30,54 @@ const SalesList = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div
-                className={clsx(
-                  'text-blue text-semibold',
-                  styles['table--payment-type']
-                )}
-              >
-                <Icon iconId="link" />
-                <span>Cobro no realizado</span>
-              </div>
-            </td>
-            <td>14/6/2024 - 16:16:00</td>
-            <td>
-              <img src={Amex} alt="logo" height="24px" />
-              ****6544
-            </td>
-            <td>GZEN8223AMMWA</td>
-            <td>
-              <div className={clsx(styles['table--payment-amount'])}>
-                <span className={clsx('text-blue text-semibold')}>
-                  $180.000
-                </span>
-                <span>Deducción Bold</span>
-                <span>-$2.700</span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div
-                className={clsx(
-                  'text-blue text-semibold',
-                  styles['table--payment-type']
-                )}
-              >
-                <Icon iconId="calculator" />
-                <span>Cobro no realizado</span>
-              </div>
-            </td>
-            <td>14/6/2024 - 16:16:00</td>
-            <td>
-              <img src={Amex} alt="logo" height="24px" />
-              ****6544
-            </td>
-            <td>GZEN8223AMMWA</td>
-            <td>
-              <div className={clsx(styles['table--payment-amount'])}>
-                <span className={clsx('text-blue text-semibold')}>
-                  $180.000
-                </span>
-                <span className={clsx('text-gray')}>Deducción Bold</span>
-                <span className={clsx('text-red')}>-$2.700</span>
-              </div>
-            </td>
-          </tr>
+          {data
+            ? data?.map((transaction: TransactionsType) => (
+                <tr>
+                  <td>
+                    <div
+                      className={clsx(
+                        'text-blue text-semibold',
+                        styles['table--payment-type']
+                      )}
+                    >
+                      <Icon
+                        iconId={
+                          transaction.salesType === 'PAYMENT_LINK'
+                            ? 'link'
+                            : 'calculator'
+                        }
+                      />
+                      <span>
+                        {transaction.status === 'REJECTED'
+                          ? 'Cobro no realizado'
+                          : 'Cobro exitoso'}
+                      </span>
+                    </div>
+                  </td>
+                  <td>{transaction.createdAt}</td>
+                  <td>
+                    <PaymentMethodLogo paymentMethod={transaction.paymentMethod}/>
+                    ****{transaction.transactionReference}
+                  </td>
+                  <td>{transaction.id}</td>
+                  <td>
+                    <div className={clsx(styles['table--payment-amount'])}>
+                      <span className={clsx('text-blue text-semibold')}>
+                        {currencyFormat(transaction.amount)}
+                      </span>
+                      {transaction.deduction && (
+                        <>
+                          <span>Deducción Bold</span>
+                          <span className={clsx('text-red text-semibold')}>
+                            -{currencyFormat(transaction.deduction)}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))
+            : 'No reults'}
         </tbody>
       </table>
     </div>

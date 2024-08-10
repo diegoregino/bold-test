@@ -5,12 +5,13 @@ import React, { ReactElement } from 'react';
 
 type ModalProps = {
   children: ReactElement;
+  onClose: () => void;
 };
 
-const Modal: React.FC<ModalProps> = ({children}) => {
+const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
   return (
     <dialog className={clsx(styles.dialog)} open>
-      <div className={clsx(styles['dialog--close'])}>
+      <div className={clsx(styles['dialog--close'])} onClick={onClose}>
         <Icon iconId="close" />
       </div>
       <div className={clsx(styles['dialog--content'])}>{children}</div>
