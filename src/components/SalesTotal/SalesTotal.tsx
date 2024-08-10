@@ -2,8 +2,11 @@ import clsx from 'clsx';
 import Icon from '../Icon/Icon';
 import './SalesTotal.scss';
 import { currencyFormat } from '../../lib/utils';
+import { useTransactionStore } from '../../stores/transactions/transactions';
 
 const SalesTotal = () => {
+  const totalSales = useTransactionStore((state) => state.totalSales);
+
   return (
     <div className={clsx('salestotal')}>
       <div
@@ -13,7 +16,7 @@ const SalesTotal = () => {
         <Icon iconId="info" />
       </div>
       <div className={clsx('salestotal--content')}>
-        <p className={clsx('big-text')}>{currencyFormat(394561894)}</p>
+        <p className={clsx('big-text')}>{currencyFormat(totalSales())}</p>
         <p>Junio, 2024</p>
       </div>
     </div>

@@ -2,15 +2,14 @@ import styles from './SalesList.module.scss';
 import Icon from '../Icon/Icon';
 import clsx from 'clsx';
 import { TransactionsType } from '../../types/transactions';
-import React from 'react';
-import { currencyFormat } from '../../lib/utils';
+import { currencyFormat, dateFormat } from '../../lib/utils';
 import PaymentMethodLogo from '../PaymentMethodLogo/PaymentMethodLogo';
+import { useTransactionStore } from '../../stores/transactions/transactions';
 
-type SalesListProps = {
-  data: TransactionsType[] | undefined;
-};
+const SalesList = () => {
 
-const SalesList: React.FC<SalesListProps> = ({ data }) => {
+  const data = useTransactionStore(state => state.transactionsList)
+
   return (
     <div className={clsx(styles.saleslist)}>
       <div className={clsx('background-gradient', styles['saleslist--title'])}>
@@ -30,54 +29,60 @@ const SalesList: React.FC<SalesListProps> = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {data
-            ? data?.map((transaction: TransactionsType) => (
-                <tr>
-                  <td>
-                    <div
-                      className={clsx(
-                        'text-blue text-semibold',
-                        styles['table--payment-type']
-                      )}
-                    >
-                      <Icon
-                        iconId={
-                          transaction.salesType === 'PAYMENT_LINK'
-                            ? 'link'
-                            : 'calculator'
-                        }
-                      />
-                      <span>
-                        {transaction.status === 'REJECTED'
-                          ? 'Cobro no realizado'
-                          : 'Cobro exitoso'}
-                      </span>
-                    </div>
-                  </td>
-                  <td>{transaction.createdAt}</td>
-                  <td>
-                    <PaymentMethodLogo paymentMethod={transaction.paymentMethod}/>
-                    ****{transaction.transactionReference}
-                  </td>
-                  <td>{transaction.id}</td>
-                  <td>
-                    <div className={clsx(styles['table--payment-amount'])}>
-                      <span className={clsx('text-blue text-semibold')}>
-                        {currencyFormat(transaction.amount)}
-                      </span>
-                      {transaction.deduction && (
-                        <>
-                          <span>Deducción Bold</span>
-                          <span className={clsx('text-red text-semibold')}>
-                            -{currencyFormat(transaction.deduction)}
-                          </span>
-                        </>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))
-            : 'No reults'}
+          {data.length > 0 ? (
+            data?.map((transaction: TransactionsType) => (
+              <tr key={transaction.id}>
+                <td>
+                  <div
+                    className={clsx(
+                      'text-blue text-semibold',
+                      styles['table--payment-type']
+                    )}
+                  >
+                    <Icon
+                      iconId={
+                        transaction.salesType === 'PAYMENT_LINK'
+                          ? 'link'
+                          : 'calculator'
+                      }
+                    />
+                    <span>
+                      {transaction.status === 'REJECTED'
+                        ? 'Cobro no realizado'
+                        : 'Cobro exitoso'}
+                    </span>
+                  </div>
+                </td>
+                <td>{dateFormat(transaction.createdAt)}</td>
+                <td>
+                  <PaymentMethodLogo
+                    paymentMethod={transaction.paymentMethod}
+                  />
+                  ****{transaction.transactionReference}
+                </td>
+                <td>{transaction.id}</td>
+                <td>
+                  <div className={clsx(styles['table--payment-amount'])}>
+                    <span className={clsx('text-blue text-semibold')}>
+                      {currencyFormat(transaction.amount)}
+                    </span>
+                    {transaction.deduction && (
+                      <>
+                        <span>Deducción Bold</span>
+                        <span className={clsx('text-red text-semibold')}>
+                          -{currencyFormat(transaction.deduction)}
+                        </span>
+                      </>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td>No results</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const currencyFormat = (value: number): string => {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -6,3 +8,6 @@ export const currencyFormat = (value: number): string => {
 
   return formatter.format(value);
 };
+
+export const dateFormat = (timestamp: number): string =>
+  dayjs(timestamp).format('DD/MM/YYYY - HH:mm:ss');

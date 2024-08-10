@@ -9,10 +9,10 @@ import { useTransactions } from '../hooks/useTransactions';
 
 const Dashboard = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const { data, isLoading } = useTransactions();
+  const { isLoading } = useTransactions();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return 'Cargando...'
   }
 
   return (
@@ -21,7 +21,7 @@ const Dashboard = () => {
         <SalesTotal />
         <Filters />
       </section>
-      <SalesList data={data?.data} />
+      <SalesList />
       {modalOpen && (
         <Modal
           onClose={() => {

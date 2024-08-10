@@ -2,27 +2,30 @@ import clsx from 'clsx';
 import FilterOption from './FilterOption';
 import styles from './Filters.module.scss';
 import FilterDropdown from './FilterDropdown';
-import { useState } from 'react';
+import { useFilterStore } from '../../stores/filters/filters.store';
+import { useFilters } from '../../hooks/useFilters';
 
 const Filters = () => {
-  const [dateSelected, setDateSelected] = useState<string>('');
+  const { dateFilter } = useFilters();
+  const dateSelected = useFilterStore((state) => state.dateSelected);
+
   return (
     <div>
       <div>
         <div className={clsx(styles.filters)}>
           <FilterOption
             selected={dateSelected === 'hoy'}
-            onClick={() => setDateSelected('hoy')}
+            onClick={() => dateFilter('hoy')}
             label="Hoy"
           />
           <FilterOption
             selected={dateSelected === 'estasemana'}
-            onClick={() => setDateSelected('estasemana')}
+            onClick={() => dateFilter('estasemana')}
             label="Esta semana"
           />
           <FilterOption
             selected={dateSelected === 'junio'}
-            onClick={() => setDateSelected('junio')}
+            onClick={() => dateFilter('junio')}
             label="Junio"
           />
         </div>
