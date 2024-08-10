@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: $white;
+  border-radius: $spacing-sm;
+}

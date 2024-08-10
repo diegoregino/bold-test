@@ -3,9 +3,8 @@ import './Topbar.module.scss';
 
 const Topbar = () => {
   return (
-    <nav>
+    <nav className="background-gradient">
       <Logo />
-
       <ul>
         <li>Mi negocio</li>
         <li>Ayuda</li>

@@ -1,0 +1,57 @@
+@import '../../styles/variables';
+
+.saleslist {
+  background-color: $white;
+  border-radius: $spacing-md $spacing-md 0 0;
+  overflow: hidden;
+
+  &--title {
+    padding: $spacing-md;
+  }
+}
+
+input:not([type='checkbox']) {
+  background-color: $white;
+  border: none;
+  border-bottom: 1px solid $light-grey;
+  color: $dark-grey;
+  font-size: $spacing-md;
+  padding: $spacing-md;
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  tr {
+    th {
+      text-align: left;
+      padding: $spacing-sm;
+    }
+    td {
+      border-bottom: 2px solid $light-grey;
+    }
+    &:first-child {
+      td:first-child {
+        border-left: 4px solid gray;
+        border-collapse: collapse;
+        padding: $spacing-md;
+      }
+    }
+    td:first-child {
+      border-left: 2px solid blue;
+      border-collapse: collapse;
+      padding: $spacing-md;
+    }
+  }
+
+  &--payment-type {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  &--payment-amount {
+    display: flex;
+    flex-direction: column;
+  }
+}

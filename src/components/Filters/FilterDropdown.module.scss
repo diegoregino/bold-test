@@ -1,0 +1,63 @@
+@import '../../styles/variables';
+
+.filter-dropdown {
+  position: relative;
+}
+
+@keyframes dropdownIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.dropdown {
+  animation: dropdownIn 0.5s forwards;
+  background-color: $white;
+  border-radius: $spacing-sm;
+  box-shadow: 0px 4px 8px -3px rgba(0, 0, 0, 0.1);
+  right: 0;
+  padding: $spacing-md $spacing-lg;
+  position: absolute;
+  transform-origin: top right;
+  top: 0;
+  width: max-content;
+
+  &--title {
+    margin-bottom: $spacing-md;
+    text-align: center;
+    span {
+      position: absolute;
+      right: $spacing-sm;
+      top: $spacing-sm;
+    }
+  }
+
+  &--item {
+    margin: $spacing-sm 0;
+    label {
+      align-items: center;
+      display: flex;
+      gap: $spacing-sm;
+
+      input {
+        height: 1rem;
+        width: 1rem;
+      }
+
+      span {
+        color: $blue;
+        font-weight: 500;
+      }
+    }
+  }
+
+  button {
+    margin-top: $spacing-md;
+    width: 100%;
+  }
+}

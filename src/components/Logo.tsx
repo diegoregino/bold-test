@@ -1,6 +1,6 @@
 const Logo = () => {
   return (
-    <svg width="135" height="48" viewBox="0 0 135 48">
+    <svg width="135" height="48" viewBox="0 0 135 48" className="logo">
       <style></style>
       <defs>
         <linearGradient id="bold-icon_inline_svg__gradient">

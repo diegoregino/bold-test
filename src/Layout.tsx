@@ -5,7 +5,9 @@ const Layout = () => {
   return (
     <>
       <Topbar />
-      <Dashboard />
+      <main>
+        <Dashboard />
+      </main>
     </>
   );
 };

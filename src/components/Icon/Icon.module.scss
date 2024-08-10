@@ -1,0 +1,12 @@
+@import '../../styles/variables';
+
+.icon {
+  display: flex;
+  height: $spacing-md;
+  width: $spacing-md;
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+}
