@@ -1,5 +1,4 @@
 import IconsIndex from './iconsIndex';
-import styles from './Icon.module.scss';
 import React from 'react';
 import clsx from 'clsx';
 
@@ -8,7 +7,7 @@ type IconProps = {
 }
 
 const Icon: React.FC<IconProps> = ({iconId}) => {
-  return <span className={clsx(styles.icon)}>{IconsIndex[iconId]}</span>;
+  return <span className={clsx('flex h-4 w-4')}>{IconsIndex[iconId]}</span>;
 };
 
 export default Icon;

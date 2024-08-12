@@ -1,13 +1,19 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import './App.scss';
+import './App.css';
 import { Toaster } from 'sonner';
 import Layout from './Layout';
-const queryClient = new QueryClient();
+import Modal from './containers/Modal';
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: 2, refetchOnWindowFocus: false } },
+});
+
 function App() {
+  
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout/>
-      <Toaster />
+      <Layout />
+      <Toaster richColors position='top-center' />
+      <Modal/>
     </QueryClientProvider>
   );
 }

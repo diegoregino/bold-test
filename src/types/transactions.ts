@@ -6,5 +6,5 @@ export type TransactionsType = {
   createdAt: number;
   transactionReference: number;
   amount: number;
-  deduction?: number;
+  deduction: number;
 };

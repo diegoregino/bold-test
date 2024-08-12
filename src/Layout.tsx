@@ -1,13 +1,11 @@
-import Topbar from './components/Topbar/Topbar';
+import TopBar from './components/TopBar';
 import Dashboard from './views/Dashboard';
 
 const Layout = () => {
   return (
     <>
-      <Topbar />
-      <main>
-        <Dashboard />
-      </main>
+      <TopBar />
+      <Dashboard />
     </>
   );
 };
